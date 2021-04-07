@@ -1,7 +1,5 @@
 package com.company;
 
-import com.company.Person;
-
 
 public class Main {
 
@@ -15,32 +13,18 @@ public class Main {
         Person Ann = new Person(false, "Ann");
         Person Kate = new Person(false, "Kate");
 
+        attemptToMarry(Alex, Maria);
+        attemptToMarry(Ann, Eduard);
+        attemptToMarry(Ann, Alex);
+        attemptToMarry(Ivan, Eduard);
+        attemptToMarry(Ivan, Kate);
+    }
 
-
-        if (Alex.marry(Maria))
-            System.out.println(Alex.getName() + " has married with " + Maria.getName());
+    static void attemptToMarry(Person person1, Person person2)
+    {
+        if (person1.marry(person2))
+            System.out.println(person1.getName() + " is married with " + person2.getName() + " now");
         else
-            System.out.println(Alex.getName() + " and "  + Maria.getName() + " have same gender");
-
-        if (Ann.marry(Eduard))
-            System.out.println(Ann.getName() + " has married with " + Eduard.getName());
-        else
-            System.out.println(Ann.getName() + " and "  + Eduard.getName() + " have same gender");
-
-        if (Ann.marry(Alex))
-            System.out.println(Ann.getName() + " has married with " + Alex.getName());
-        else
-            System.out.println(Ann.getName() + " and "  + Alex.getName() + " have same gender");
-
-        if (Ivan.marry(Eduard))
-            System.out.println(Ivan.getName() + " has married with " + Eduard.getName());
-        else
-            System.out.println(Ivan.getName() + " and "  + Eduard.getName() + " have same gender");
-
-        if (Ivan.marry(Kate))
-            System.out.println(Ivan.getName() + " has married with " + Kate.getName());
-        else
-            System.out.println(Ivan.getName() + " and "  + Kate.getName() + " have same gender");
-
+            System.out.println(person1.getName() + " and "  + person2.getName() + " have same gender");
     }
 }

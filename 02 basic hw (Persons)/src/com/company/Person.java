@@ -22,8 +22,9 @@ public class Person {
             if (spouse != null) {
                 this.divorce();
             }
+
             if (person.spouse != null) {
-                this.divorce();
+                person.divorce();
             }
 
             spouse = person;
@@ -42,6 +43,7 @@ public class Person {
     public boolean divorce() {
         boolean isNotNull = (spouse != null);
         if (isNotNull) {
+            System.out.println(name + " is divorce with " + spouse.getName() + " now");
             spouse.spouse = null;
             spouse = null;
         }
