@@ -8,8 +8,14 @@ public class Solution {
         Scanner scanner = new Scanner(System.in);
         int cmCount = scanner.nextInt();
 
-        int inches = cmCount % 3 > 1 ? cmCount / 3 + 1 : cmCount / 3;
+        int inchCount = cmCount / 3;
+        int inchRemainder = cmCount % 3;
 
-        System.out.println(inches / 12 + " " + inches % 12);
+        inchCount += inchRemainder > 1 ? 1 : 0;
+
+        int foots = inchCount / 12;
+        int inches = inchCount % 12;
+
+        System.out.println(foots + " " + inches);
     }
 }

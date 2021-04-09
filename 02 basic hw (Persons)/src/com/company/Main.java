@@ -14,10 +14,11 @@ public class Main {
         Person Kate = new Person(false, "Kate");
 
         attemptToMarry(Alex, Maria);
-        attemptToMarry(Ann, Eduard);
-        attemptToMarry(Ann, Alex);
-        attemptToMarry(Ivan, Eduard);
-        attemptToMarry(Ivan, Kate);
+        attemptToMarry(Alex, Maria);
+//        attemptToMarry(Ann, Eduard);
+//        attemptToMarry(Ann, Alex);
+//        attemptToMarry(Ivan, Eduard);
+//        attemptToMarry(Ivan, Kate);
     }
 
     static void attemptToMarry(Person person1, Person person2)
@@ -25,6 +26,6 @@ public class Main {
         if (person1.marry(person2))
             System.out.println(person1.getName() + " is married with " + person2.getName() + " now");
         else
-            System.out.println(person1.getName() + " and "  + person2.getName() + " have same gender");
+            System.out.println(person1.getName() + " cant "  + person2.getName() + " married or married before");
     }
 }
