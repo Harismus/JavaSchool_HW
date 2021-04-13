@@ -33,7 +33,7 @@ public class Main {
             List<Car> listCrossOver = getAndPrintSubList.apply("Кроссовер");
             List<Car> listSedan = getAndPrintSubList.apply("Седан");
             List<Car> listHatchback = getAndPrintSubList.apply("Хэтчбек");
-            List<Car> listUniversal = getAndPrintSubList.apply("Универсал");
+           // List<Car> listUniversal = getAndPrintSubList.apply("Универсал");
         } catch (Exception e) {
             e.printStackTrace();
         }
