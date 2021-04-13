@@ -15,14 +15,17 @@ public class FileWriter {
 
         OutputStream output = Files.newOutputStream(pathToFile);
 
-        List<String> stringList = Arrays.asList(buffer.split(" "));
+
+        List<String> stringList = ArrayCast.from(buffer);
+
+//        System.out.println("buffer.length()/stringList.size() = " + buffer.length()/stringList.size());
 
         String line = new String();
         for (int i = 0; i < stringList.size(); i++) {
             line += stringList.get(i);
             line += " ";
 
-            if (line.length() > stringLength) {
+            if (line.length() >= stringLength) {
                 output.write(line.getBytes(StandardCharsets.UTF_8));
                 output.write('\n');
 
