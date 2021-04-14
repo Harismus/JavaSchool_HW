@@ -11,8 +11,7 @@ public class Task1 extends AbstractTask {
     public static void Do(String buffer) {
         Map<String, Integer> wordsInfo = textParser.countWords(buffer);
 
-        for (Map.Entry<String, Integer> wordInfo: wordsInfo.entrySet()) {
-            System.out.println("word = " + wordInfo.getKey() + " count = " + wordInfo.getValue());
-        }
+        System.out.println("================Task1==================");
+        System.out.println("Количество различных слов в файле равно: " +  wordsInfo.size());
     }
 }
