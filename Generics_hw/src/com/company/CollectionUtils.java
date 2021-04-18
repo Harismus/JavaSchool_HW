@@ -13,50 +13,57 @@ public class CollectionUtils {
      * @param <T>
      */
     public static <T> void addAll(List<? extends T> source, List<? super T> destination) {
-        destination.addAll(source);
+        destination.addAll( source );
     }
 
     /**
+     * создание новой коллекции
+     *
      * @param <T>
      * @return
      */
-    public static <T> List<T> newArrayList() {
+    public static <T> List<? super T> newArrayList() {
         return new ArrayList<T>();
     }
 
-    /**
+    /*
+     * возвращает индекс первого вхождения объекта obj в список. Если объект не найден, то возвращается -1
      * @param source
      * @param o
      * @param <T>
      * @return
      */
-    public static <T> int indexOf(List<T> source, T o) {
-        return source.indexOf(o);
+    public static <T> int indexOf(List<? extends T> source, T obj) {
+        return source.indexOf( obj );
     }
 
     /**
+     * применяется для выборки первых n элементов потоков
+     *
      * @param source
      * @param size
      * @return
      */
-    public static <T> List<T> limit(List<T> source, int size) {
-        return source.stream().limit(size).collect(Collectors.toList());
+    public static <T> List<T> limit(List<? extends T> source, int size) {
+        return source.stream().limit( size ).collect( Collectors.toList() );
     }
 
     /**
+     * добавление элемента в список
+     *
      * @param source
-     * @param o
+     * @param obj
      */
-    public static <T> void add(List<T> source, T o) {
-        source.add(o);
+    public static <T> void add(List<? super T> source, T obj) {
+        source.add( obj );
     }
 
     /**
      * @param removeFrom
-     * @param c2
+     * @param dest
      */
-    public static <T> void removeAll(List<T> removeFrom, List<T> c2) {
-        removeFrom.removeAll(c2);
+    public static <T> void removeAll(List<? super T> removeFrom, List<T> dest) {
+        removeFrom.removeAll( dest );
     }
 
     /**
@@ -66,8 +73,8 @@ public class CollectionUtils {
      * @param c2
      * @return
      */
-    public static <T> boolean containsAll(List<T> c1, List<T> c2) {
-        return c1.containsAll(c2);
+    public static <T> boolean containsAll(List<? extends T> c1, List<? extends T> c2) {
+        return c1.containsAll( c2 );
     }
 
     /**
@@ -77,8 +84,8 @@ public class CollectionUtils {
      * @param c2
      * @return
      */
-    public static <T> boolean containsAny(List<T> c1, List<T> c2) {
-        return c1.contains(c2);
+    public static <T> boolean containsAny(List<? extends T> c1, List<? extends T> c2) {
+        return c1.contains( c2 );
     }
 
     /**
@@ -91,12 +98,12 @@ public class CollectionUtils {
      * @param max
      * @return
      */
-    public static List<java.lang.Integer> range(List<java.lang.Integer> list, java.lang.Integer min, java.lang.Integer max) {
+    public static List<java.lang.Integer> range(List<? extends java.lang.Integer> list, java.lang.Integer min, java.lang.Integer max) {
         List<Integer> listRanged = new ArrayList<>();
 
         for (Integer obj : list) {
             if ((obj >= min) && (obj <= max))
-                listRanged.add(obj);
+                listRanged.add( obj );
         }
         return listRanged;
     }
@@ -112,7 +119,14 @@ public class CollectionUtils {
      * @param comparator
      * @return
      */
-//    public static <T> List<T> range(List<T> list, T min, T max, Comparator<T> comparator) {
-//        return list;
-//    }
+    public static List<java.lang.Integer> range(List<? extends java.lang.Integer> list, java.lang.Integer min, java.lang.Integer max, Comparator<java.lang.Integer> comparator) {
+
+        List<Integer> listRanged = new ArrayList<>();
+
+        for (Integer obj : list) {
+            if ((comparator.compare( obj, min ) >= 0) && (comparator.compare( obj, max ) <= 0))
+                listRanged.add( obj );
+        }
+        return listRanged;
+    }
 }

@@ -5,6 +5,8 @@ package com.company;
  **/
 public class Task1 {
     static void Do() {
+        System.out.println("***********************************");
+        System.out.println( "Task1.Do" );
         CountMap<Integer> map = new CountMapImpl<>();
 
         map.add( 10 );
