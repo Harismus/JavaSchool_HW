@@ -19,6 +19,7 @@ public class Console extends JFrame {
     final JLabel label = new JLabel( "Press pin-code:" );
     Timer times = new Timer();
     final int MAX_LENGTH = 4;
+    ITerminal terminal = new TerminalImpl();
 
     public Console() {
         super( "Terminal" );
@@ -29,15 +30,15 @@ public class Console extends JFrame {
         setVisible( true );
     }
 
-    private static TimerTask wrap(Runnable r) {
-        return new TimerTask() {
-
-            @Override
-            public void run() {
-                r.run();
-            }
-        };
-    }
+//    private static TimerTask wrap(Runnable r) {
+//        return new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                r.run();
+//            }
+//        };
+//    }
 
     public void createGUI() {
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -53,25 +54,36 @@ public class Console extends JFrame {
 
         textArea.addKeyListener( new KeyAdapter() {
             public void keyReleased(KeyEvent e) {
+                String text = textArea.getText();
                 Pattern p = Pattern.compile( "(([0-9]){0,}([\\.]){0,})+" );
-                Matcher m = p.matcher( textArea.getText() );
+                Matcher m = p.matcher( text );
 
                 if (!m.matches()) {//
                     label.setText( "Warning: you must press just numbers." );
 
-                    times.schedule( wrap( () -> label.setText( "Press pin-code:" ) ), 3000 );
-                    String str = textArea.getText();
+                    times.schedule( WrapTimerTask.wrap( () -> label.setText( "Press pin-code:" ) ), 3000 );
 
                     textArea.setText( "" );
 
-                    for (int i = 0; i < str.length(); ++i) {
-                        if (!Character.isAlphabetic( str.charAt( i ) ))
-                            textArea.append( String.valueOf( str.charAt( i ) ) );
+                    for (int i = 0; i < text.length(); ++i) {
+                        if (!Character.isAlphabetic( text.charAt( i ) ))
+                            textArea.append( String.valueOf( text.charAt( i ) ) );
                     }
                     return;
-                } else if (textArea.getText().length() == 4) {
+                } else if (text.length() == MAX_LENGTH) {
 
+                    int pinCode = Integer.parseInt( text );
+                    try {
+                        terminal.inputPinCode( pinCode );
+                    } catch (IncorrectPinExceprion incorrectPinExceprion) {
 
+                        times.schedule( WrapTimerTask.wrap( () -> label.setText( incorrectPinExceprion.getMessage() ) ), 3000 );
+                        //incorrectPinExceprion.printStackTrace();
+                    } catch (AccountIsLockedException accountIsLockedException) {
+
+                        times.schedule( WrapTimerTask.wrap( () -> label.setText( accountIsLockedException.getMessage() ) ), 10000 );
+                        //accountIsLockedException.printStackTrace();
+                    }
                 }
             }
         } );
