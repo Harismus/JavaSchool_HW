@@ -13,11 +13,12 @@ public class PinValidator {
         return lockTimeInSeconds;
     }
 
-    public boolean isAccountIsLocked() {
+    public boolean isAccountLocked() {
         return isLockedAccount;
     }
 
     public boolean isAuthorized() {
+
         return isAuthorized;
     }
 
@@ -25,21 +26,48 @@ public class PinValidator {
         return dateOfBlocking;
     }
 
+    public void exitFromAccount() {
+        isAuthorized = false;
+        incorrectPinCount = 0;
+    }
+
     public void inputPinCode(int code) throws IncorrectPinExceprion, AccountIsLockedException {
-        if (code == pinCode) {
+        System.out.println( "code = " + code );
+
+        if (isLockedAccount) {
+            triedToCheckTimeout();
+        }
+
+        if (!isLockedAccount && code == pinCode) {
             isAuthorized = true;
             incorrectPinCount = 0;
-        } else {
+            isLockedAccount = false;
+        }  else {
             if (++incorrectPinCount >= 3) {
+                isLockedAccount = true;
                 dateOfBlocking = System.currentTimeMillis();
-                throw new AccountIsLockedException( "Аккаунт заблокирован на 10 секунд. ", timeToUnlock() );
+                triedToCheckTimeout();
             }
+
             throw new IncorrectPinExceprion( "Неверный пин." );
         }
     }
 
-    public long timeToUnlock() {
+    public long checkTimeout() {
         long isTimeout = (dateOfBlocking + lockTimeInSeconds * 1000 - System.currentTimeMillis()) / 1000;
         return isTimeout >= 0 ? isTimeout : 0;
+    }
+
+
+    private void triedToCheckTimeout() throws AccountIsLockedException
+    {
+        long sec = checkTimeout();
+        if (sec > 0) {
+            throw new AccountIsLockedException( "Аккаунт заблокирован. ", sec );
+        }
+        else {
+            incorrectPinCount = 0;
+            isLockedAccount = false;
+        }
     }
 }

@@ -7,6 +7,6 @@ import java.util.Date;
  */
 public class AccountIsLockedException extends Exception {
     public AccountIsLockedException ( String message, long timeToUnlock ) {
-        super(message + "До разблокировки: " + timeToUnlock + " сек.");
+        super(message + "Повторите попытку через: " + timeToUnlock + " сек.");
     }
 }
