@@ -10,6 +10,8 @@ public class Console extends JFrame {
     private JLabel label = new JLabel( "Press pin-code:" );
     final int MAX_LENGTH = 4;
 
+
+
     public Console() {
         super( "Terminal" );
         createGUI();
