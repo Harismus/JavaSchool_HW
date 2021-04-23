@@ -14,7 +14,7 @@ public class TerminalServer {
 
     public int withdraw ( int value ) throws NotEnoughMoneyException {
         if (countOfMoneyOnAccount < value) {
-            throw new NotEnoughMoneyException ("Недостаточно золота.");
+            throw new NotEnoughMoneyException ("Недостаточно денег.");
         }
         countOfMoneyOnAccount -= value;
         return countOfMoneyOnAccount;

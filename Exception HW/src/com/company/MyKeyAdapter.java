@@ -27,20 +27,18 @@ public class MyKeyAdapter extends KeyAdapter {
         this.textArea = textArea;
         this.label = label;
         this.MAX_LENGTH = MAX_LENGTH;
-
     }
 
     public void keyReleased(KeyEvent e) {
 
         try {
-            System.out.println( "terminal.isAuthorized() = " + terminal.isAuthorized() );
             if (menu == MENU.AUTHORIZING) { //!< пока не вошли в аккаунт
                 String text = textArea.getText();
 
                 if (!DigitValidator.isMatch( text )) {//
-                    label.setText( "Warning: you must press just numbers." );
+                    label.setText( "Предупреждение: нужно вводить только числа." );
 
-                    times.schedule( WrapTimerTask.wrap( () -> label.setText( "Press pin-code:" ) ), 3000 );
+                    times.schedule( WrapTimerTask.wrap( () -> label.setText( "Введите пин-код:" ) ), 3000 );
 
                     textArea.setText( "" );
 
@@ -56,20 +54,19 @@ public class MyKeyAdapter extends KeyAdapter {
 
                     if (terminal.inputPinCode( pinCode ) == true) {
                         textArea.setText( "" );
-                        label.setText( "Entering to account... Please Wait..." );
+                        label.setText( "Вход в аккаунт. Пожалуйста подождите..." );
                         String countMoney = String.valueOf( terminal.checkAccount() );
 
                         times.schedule( WrapTimerTask.wrap( () -> {
 
-                            label.setText( "Amount of money left: " + countMoney + "\n " );
+                            label.setText( "Сумма: " + countMoney + "\n " );
                             textArea.setEditable( false );
                             textArea.setText(
-                                    "Select a command:\n" +
-                                            "1) Withdraw money\n" +
-                                            "2) Deposit money\n" +
-
+                                    "Введите номер команды:\n" +
+                                            "1) Снять деньги\n" +
+                                            "2) Положить деньги\n" +
                                             "---------------\n" +
-                                            "3) Exit\n"
+                                            "3) Выход\n"
                             );
 
                             menu = MENU.MAIN;
@@ -85,7 +82,7 @@ public class MyKeyAdapter extends KeyAdapter {
                 switch (key) {
                     case 1: {
                         String countMoney = String.valueOf( terminal.checkAccount() );
-                        label.setText( "Amount of money left: " + countMoney + " Type amount of money and Press enter: " );
+                        label.setText( "Введите сумму и нажмите enter. Для возврата в главное меню нажмите Esc "  + "\tСумма: " + countMoney  );
                         menu = MENU.WITHDRAW;
                         textArea.setEditable( true );
                         textArea.setText( "" );
@@ -93,7 +90,7 @@ public class MyKeyAdapter extends KeyAdapter {
                     }
                     case 2: {
                         String countMoney = String.valueOf( terminal.checkAccount() );
-                        label.setText( "Amount of money left: " + countMoney + " Type amount of money and Press enter: " );
+                        label.setText( "Введите сумму и нажмите enter. Для возврата в главное меню нажмите Esc "  + "\tСумма: " + countMoney  );
                         menu = MENU.DEPOSIT;
                         textArea.setEditable( true );
                         textArea.setText( "" );
@@ -101,11 +98,11 @@ public class MyKeyAdapter extends KeyAdapter {
                     }
                     case 3: {
                         terminal.exitFromAccount();
-                        label.setText( "Exit from Account. Please Wait..." );
+                        label.setText( "Выход из аккаунта. Пожалуйста ждите..." );
 
                         times.schedule( WrapTimerTask.wrap( () ->
                                 {
-                                    label.setText( "Press pin-code:" );
+                                    label.setText( "Введите пин-код:" );
                                     menu = MENU.AUTHORIZING;
                                 }
                         ), 3000 );
@@ -118,7 +115,6 @@ public class MyKeyAdapter extends KeyAdapter {
                 }
             } else if (menu == MENU.WITHDRAW) {
 
-                System.out.println( "e.getKeyCode() = " + e.getKeyCode() );
                 if (e.getKeyCode() == 10) { //!< enter = 10
                     String text = textArea.getText().replaceAll( "\n", "" );
 
@@ -128,26 +124,24 @@ public class MyKeyAdapter extends KeyAdapter {
 
                     terminal.withdraw( Integer.parseInt( textArea.getText() ) );
                     String countMoney = String.valueOf( terminal.checkAccount() );
-                    label.setText( "Amount of money left: " + countMoney + "\n " );
+                    label.setText( "Введите сумму и нажмите enter. Для возврата в главное меню нажмите Esc "  + "\tСумма: " + countMoney  );
                 } else if (e.getKeyCode() == 27) {
 
                     String countMoney = String.valueOf( terminal.checkAccount() );
-                    label.setText( "Amount of money left: " + countMoney + "\n " );
+                    label.setText( "Сумма: " + countMoney + "\n " );
                     textArea.setEditable( false );
                     textArea.setText(
-                            "Select a command:\n" +
-                                    "1) Withdraw money\n" +
-                                    "2) Deposit money\n" +
+                            "Введите номер команды:\n" +
+                                    "1) Снять деньги\n" +
+                                    "2) Положить деньги\n" +
                                     "---------------\n" +
-                                    "3) Exit\n"
+                                    "3) Выход\n"
                     );
 
                     menu = MENU.MAIN;
                 }
-
             } else if (menu == MENU.DEPOSIT) {
 
-                System.out.println( "e.getKeyCode() = " + e.getKeyCode() );
                 if (e.getKeyCode() == 10) { //!< enter = 10
 
                     String text = textArea.getText().replaceAll( "\n", "" );
@@ -158,37 +152,33 @@ public class MyKeyAdapter extends KeyAdapter {
 
                     terminal.deposit( Integer.parseInt( textArea.getText() ) );
                     String countMoney = String.valueOf( terminal.checkAccount() );
-                    label.setText( "Amount of money left: " + countMoney + "\n " );
+                    label.setText( "Введите сумму и нажмите enter. Для возврата в главное меню нажмите Esc "  + "\tСумма: " + countMoney  );
                 } else if (e.getKeyCode() == 27) {
                     String countMoney = String.valueOf( terminal.checkAccount() );
-                    label.setText( "Amount of money left: " + countMoney + "\n " );
+                    label.setText( "Сумма: " + countMoney + "\n " );
                     textArea.setEditable( false );
                     textArea.setText(
-                            "Select a command:\n" +
-                                    "1) Withdraw money\n" +
-                                    "2) Deposit money\n" +
+                            "Введите номер команды:\n" +
+                                    "1) Снять деньги\n" +
+                                    "2) Положить деньги\n" +
                                     "---------------\n" +
-                                    "3) Exit\n"
+                                    "3) Выход\n"
                     );
 
                     menu = MENU.MAIN;
                 }
             }
-        } catch (
-                IncorrectPinExceprion incorrectPinExceprion) {
+        } catch (IncorrectPinExceprion incorrectPinExceprion) {
             label.setText( incorrectPinExceprion.getMessage() );
-        } catch (
-                AccountIsLockedException accountIsLockedException) {
-            System.out.println( "accountIsLockedException.getMessage() = " + accountIsLockedException.getMessage() );
+        } catch (AccountIsLockedException accountIsLockedException) {
             label.setText( accountIsLockedException.getMessage() );
-        } catch (
-                IsNotAuthorizedExeption isNotAuthorizedExeption) {
+        } catch (IsNotAuthorizedExeption isNotAuthorizedExeption) {
             isNotAuthorizedExeption.getMessage();
             label.setText( isNotAuthorizedExeption.getMessage() );
         } catch (NotEnoughMoneyException notEnoughMoneyException) {
-            notEnoughMoneyException.printStackTrace();
+            label.setText( notEnoughMoneyException.getMessage() );
         } catch (IsNotValidValueException isNotValidValueException) {
-            isNotValidValueException.printStackTrace();
+            label.setText( isNotValidValueException.getMessage() );
         }
     }
 }

@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Console extends JFrame {
     private JTextArea textArea = new JTextArea();
     private JPanel panel = new JPanel();
-    private JLabel label = new JLabel( "Press pin-code:" );
+    private JLabel label = new JLabel( "Введите пин-код" );
     final int MAX_LENGTH = 4;
 
 

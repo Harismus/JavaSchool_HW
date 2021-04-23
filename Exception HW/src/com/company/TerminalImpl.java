@@ -58,7 +58,6 @@ public class TerminalImpl implements ITerminal {
         pinValidator.exitFromAccount();
     }
 
-
     private void IsAuthorizedAndNotLocked() throws AccountIsLockedException, IsNotAuthorizedExeption {
         if (pinValidator.isAccountLocked())
             throw new AccountIsLockedException( "Аккаунт заблокирован.", pinValidator.checkTimeout() );
