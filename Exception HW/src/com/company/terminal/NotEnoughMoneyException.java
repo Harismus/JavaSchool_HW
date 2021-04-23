@@ -1,4 +1,4 @@
-package com.company;
+package com.company.terminal;
 
 /**
  * Exception throws when there are less money on the account then user wants to withdraw.

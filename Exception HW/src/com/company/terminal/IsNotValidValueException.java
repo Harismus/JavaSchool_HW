@@ -1,4 +1,4 @@
-package com.company;
+package com.company.terminal;
 
 /**
  * Exception throws when value to deposit or to withdraw is not multiple to 100.

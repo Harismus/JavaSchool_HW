@@ -1,5 +1,4 @@
-package com.company;
-
+package com.company.terminal;
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;

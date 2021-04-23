@@ -1,5 +1,4 @@
-package com.company;
-
+package com.company.terminal;
 public interface ITerminal {
     boolean inputPinCode(int code) throws IncorrectPinExceprion, AccountIsLockedException;
 

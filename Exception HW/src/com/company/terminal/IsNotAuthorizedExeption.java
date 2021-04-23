@@ -1,5 +1,4 @@
-package com.company;
-
+package com.company.terminal;
 /**
  * Exception throws when user is not authorized and wants to use terminal.
  * To avoid this exception authorize to terminal.

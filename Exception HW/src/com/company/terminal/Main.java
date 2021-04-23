@@ -1,15 +1,10 @@
-package com.company;
+package com.company.terminal;
 
 
 public class Main  {
 
 
     public static void main(String[] args) {
-
         Console console = new Console();
-
-
-
-
     }
 }
