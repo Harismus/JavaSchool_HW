@@ -10,7 +10,6 @@ public class Main {
 
         Child child = new Child();
 
-
         System.out.println("=========child=========");
         for(Method method : child.getClass().getDeclaredMethods())
         {

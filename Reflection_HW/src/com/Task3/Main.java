@@ -10,8 +10,6 @@ public class Main {
         {
             if(method.getName().startsWith( "get" ))
                 System.out.println( method.getName());
-
-
         }
     }
 }

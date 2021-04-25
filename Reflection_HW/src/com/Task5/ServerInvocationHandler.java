@@ -14,14 +14,16 @@ public class ServerInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        if (args.length == 1 && cachePerson == null) {
-            cachePerson = (Person) method.invoke( serverImpl,  args );
-            System.out.println( "Read from server cachePerson = null" );
-        } else if (args.length == 1 && cachePerson != null && cachePerson.getId() != (int) args[0]) {
-            cachePerson = (Person) method.invoke( serverImpl,  args );
-            System.out.println( "Read from server  cachePerson.getId() != (int) args[0]" );
-        } else {
-            System.out.println( "Read from cache" );
+        if (method.getName().startsWith( "get" )) {
+            if (cachePerson == null) {
+                cachePerson = (Person) method.invoke( serverImpl, args );
+                System.out.println( "Read from server cachePerson = null" );
+            } else if (cachePerson != null && cachePerson.getId() != (int) args[0]) {
+                cachePerson = (Person) method.invoke( serverImpl, args );
+                System.out.println( "Read from server  cachePerson.getId() != (int) args[0]" );
+            } else {
+                System.out.println( "Read from cache" );
+            }
         }
 
         return cachePerson;
