@@ -19,11 +19,11 @@ public class CalculatorInvocationHandler implements InvocationHandler {
         }
         System.out.println( "Метод " + method.getName() + " вызван" );
 
-        long before = System.currentTimeMillis();
+        long before = System.nanoTime();
         Object invoke = method.invoke( delegate, args );
-        long after = System.currentTimeMillis();
+        long after = System.nanoTime();
 
-        System.out.println( "Метод " + method.getName() + " вызван. Время выполнения = " + (after - before)*1000 + " наносек.");
+        System.out.println( "Метод " + method.getName() + " вызван. Время выполнения = " + (after - before) + " наносек.");
 
         return invoke;
     }
