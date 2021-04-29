@@ -1,4 +1,6 @@
 public interface IWebPage {
 
-    Object getGui();
+   Integer getID();
+
+   IPersonalData getPersonalData();
 }

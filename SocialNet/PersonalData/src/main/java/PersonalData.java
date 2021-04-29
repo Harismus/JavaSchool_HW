@@ -3,8 +3,8 @@ import java.util.Collection;
 public class PersonalData implements IPersonalData {
     private Data data;
 
-    PersonalData() {
-        data = new Data( "default", 0 );
+    PersonalData(String name, int age) {
+        data = new Data( name, age );
     }
 
     @Override

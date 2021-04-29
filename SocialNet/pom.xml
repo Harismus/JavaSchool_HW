@@ -12,12 +12,23 @@
         <module>SearchEngine</module>
         <module>WebPage</module>
         <module>Messenger</module>
-        <module>Registration</module>
+        <module>Registrator</module>
         <module>Authorizer</module>
         <module>FunctionPanel</module>
         <module>Wall</module>
         <module>PersonalData</module>
+        <module>DataBase</module>
     </modules>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
