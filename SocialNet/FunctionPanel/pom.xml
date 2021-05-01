@@ -20,12 +20,6 @@
         </dependency>
         <dependency>
             <groupId>sb.Rostov</groupId>
-            <artifactId>SearchEngine</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>sb.Rostov</groupId>
             <artifactId>Messenger</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

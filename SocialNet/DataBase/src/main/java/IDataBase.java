@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Optional;
 
 public interface IDataBase {
@@ -6,4 +7,6 @@ public interface IDataBase {
     void newWebPage(IWebPage webPage);
 
     IWebPage getWebPage(String name, int password);
+
+    List<IWebPage> getWebPages(String name);
 }

@@ -1,7 +1,7 @@
 
 public class FunctionPanel implements IFunctionPanel {
     private IMessenger messager = new Messenger();
-    private ISearchEngine searchEngine = new SearchEngine();
+    private ISearchEngine searchEngine = new SearchEngine(new DataBase());
     private boolean isHide = true;
 
     @Override
