@@ -7,6 +7,7 @@ public class Wall implements IWall{
 
     @Override
     public void write(IPost iPost) {
+        listPosts.add( iPost );
     }
 
     @Override

@@ -23,6 +23,10 @@ public class DataBaseTest {
     public void getWebPage() {
         String name = alexWebpage.getPersonalData().getData().getName();
         int password = alexWebpage.getPersonalData().getData().getPassword();
-        assertNotNull( dataBase.getWebPage( name, password ) );
+
+        IWebPage webPage =  dataBase.getWebPage( name, password );
+        assertNotNull( webPage );
+        assertEquals( name, webPage.getPersonalData().getData().getName() );
+        assertEquals( password, webPage.getPersonalData().getData().getPassword() );
     }
 }
