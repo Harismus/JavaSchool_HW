@@ -1,29 +1,32 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Map;
 
-public class PluginManager extends ClassLoader {
-    private final String pluginRootDirectory;
+public class EncryptedClassloader extends ClassLoader {
+    private final String key;
+    private final File dir;
     private java.util.Map classesHash = new java.util.HashMap();
 
-    public PluginManager(String pluginRootDirectory) {
-        this.pluginRootDirectory = pluginRootDirectory;
+    public EncryptedClassloader(String key, File dir, ClassLoader parent) {
+        //super( parent );
+        this.key = key;
+        this.dir = dir;
     }
 
-    public Plugin load(String pluginName, String pluginClassName) {
-        Plugin plugin = null;
+    public ITestClass load(String className) {
+
+        ITestClass testClass = null;
         try {
-            Class<?> pluginClass = loadClass( pluginName, pluginClassName, true );
-            plugin = (Plugin) pluginClass.newInstance();
+            Class<?> pluginClass = loadClass( "",  className, true );
+            testClass = (ITestClass) pluginClass.newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
-        return plugin;
+        return testClass;
     }
 
-    private static byte[] loadFileAsBytes(File file) throws IOException {
+    private byte[] loadFileAsBytes(File file) throws IOException {
         byte[] result = new byte[(int) file.length()];
         FileInputStream f = new FileInputStream( file );
         try {
@@ -34,6 +37,10 @@ public class PluginManager extends ClassLoader {
             } catch (Exception e) {
             }
         }
+        for (int i = 0; i < result.length; i++) {
+            result[i] += Byte.valueOf( key );
+        }
+
         return result;
     }
 
@@ -43,7 +50,7 @@ public class PluginManager extends ClassLoader {
             return result;
         }
 
-        File pluginFile = new File( pluginRootDirectory + "\\" + pluginName + "\\" + pluginClassName + ".class" );
+        File pluginFile = new File( dir + "\\" + pluginName + "\\" + pluginClassName + ".class" );
 
         try {
             byte[] classBytes = loadFileAsBytes( pluginFile );
@@ -59,7 +66,8 @@ public class PluginManager extends ClassLoader {
         return result;
     }
 
-    public Class loadClass(String pluginName, String pluginClassName, boolean resolve) throws ClassNotFoundException {
+
+    public Class loadClass( String pluginName, String pluginClassName, boolean resolve) throws ClassNotFoundException {
         Class result = findClass( pluginName, pluginClassName );
         if (resolve)
             resolveClass( result );
