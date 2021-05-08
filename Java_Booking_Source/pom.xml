@@ -12,6 +12,7 @@
         <module>Semaphore</module>
         <module>DataBase</module>
         <module>Resources</module>
+        <module>Timer</module>
     </modules>
 
     <properties>
