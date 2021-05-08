@@ -8,7 +8,7 @@ public class EncryptedClassloaderTest {
     final String key = "127";
     String classDir = "target" + "\\" + "classes" + "\\";
     String inputClassName = "TestClass";
-    // String encryptedClassName = "EncTestClass";
+
     EncryptedClassloader encryptedClassloader = new EncryptedClassloader( key, new File( Paths.get( classDir + "..\\"  ).toAbsolutePath().toString() ), null );
     byte[] readClass(String inputClassname) {
         File classFile = new File( inputClassname );
@@ -53,12 +53,10 @@ public class EncryptedClassloaderTest {
 
     @Test
     public void loadClass() {
-
         encryptedClassloader.load(inputClassName);
 
         ITestClass testClass = encryptedClassloader.load(  inputClassName );
         if (!testClass.equals( null ))
             testClass.testFunc();
-
     }
 }
