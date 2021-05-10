@@ -1,11 +1,11 @@
-package com.Task6;
-
+import org.junit.Test;
 
 import java.lang.reflect.Proxy;
 
-public class Main {
-    public static void main(String[] args) {
+public class CalculatorInvocationHandlerTest {
 
+    @Test
+    public void invoke() {
 //        Calculator delegate = new CalculatorImpl();
 //
 //        //Получаем загрузчик класса у оригинального объекта
@@ -21,7 +21,6 @@ public class Main {
 
         Calculator  calculator =  new PerformanceProxy(new CalculatorImpl());
         System.out.println(calculator.calc(3));
-
 
     }
 }
