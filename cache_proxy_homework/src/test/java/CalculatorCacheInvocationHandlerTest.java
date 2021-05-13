@@ -1,3 +1,6 @@
+import calculator.Calculator;
+import calculator.CalculatorCacheInvocationHandler;
+import calculator.CalculatorImpl;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -9,7 +12,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
-public class CalculatorInvocationHandlerTest {
+public class CalculatorCacheInvocationHandlerTest {
 
     Calculator delegate = new CalculatorImpl();
 
@@ -20,7 +23,7 @@ public class CalculatorInvocationHandlerTest {
     Class[] interfaces = delegate.getClass().getInterfaces();
 
     //Создаем прокси нашего объекта
-    Calculator proxyCalculator = (Calculator) Proxy.newProxyInstance( serverClassLoader, interfaces, new CalculatorInvocationHandler( delegate ) );
+    Calculator proxyCalculator = (Calculator) Proxy.newProxyInstance( serverClassLoader, interfaces, new CalculatorCacheInvocationHandler( delegate ) );
 
     public  <T> Optional<T> readCache(String nameMethod) {
         FileInputStream fileInputStream = null;

@@ -1,6 +1,6 @@
 package enums;
 
-public enum SAVED_PLACE {
+public enum cacheType {
     FILE,
     MEMORY
 }
