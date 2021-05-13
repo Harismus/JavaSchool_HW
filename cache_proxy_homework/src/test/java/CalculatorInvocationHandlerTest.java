@@ -41,20 +41,28 @@ public class CalculatorInvocationHandlerTest {
 
     @Test
     public void calcFactorial() {
-        int res = proxyCalculator.calcFactorial(3 );
+        Integer res =  proxyCalculator.calcFactorial(3 );
         System.out.println( "calcFactorial result = " + res);
-        assertEquals(6, res);
 
-        try {
-            String nameMethod = ".\\" + Calculator.class.getMethod( "calcFactorial", int.class ).getName() + ".cache";
-            Optional<Integer> cache = readCache(nameMethod);
+        res =  proxyCalculator.calcFactorial(3 );
+        System.out.println( "calcFactorial result = " + res);
 
-            int cacheInteger = cache.get();
-            System.out.println( " cacheInteger  = " +  cacheInteger  );
-            assertEquals( res, cacheInteger );
 
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
+        assertEquals((Integer) 6, res);
+
+
+//
+//        try {
+//            String nameMethod = ".\\" + Calculator.class.getMethod( "calcFactorial", int.class ).getName() + ".cache";
+//            Optional<Integer> cache = readCache(nameMethod);
+//
+//            int cacheInteger = cache.get();
+//            System.out.println( " cacheInteger  = " +  cacheInteger  );
+//
+//            assertEquals( res, cacheInteger );
+//
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
     }
 }

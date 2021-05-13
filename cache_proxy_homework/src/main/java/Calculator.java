@@ -1,9 +1,15 @@
+import enums.SAVED_PLACE;
+import myannotation.CacheMethod;
+import myannotation.Metric;
+
 public interface Calculator {
     /**
      * Расчет факториала числа.
      * @param number
      */
-    @CacheMethod(savedPlace = SAVED_PLACE.MEMORY)
+    @CacheMethod(savedPlace = SAVED_PLACE.FILE)
     @Metric
-    int calcFactorial (int number);
+    Integer calcFactorial (int number);
+
+    Double circleArea(double M_PI, double Radius);
 }
