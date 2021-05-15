@@ -1,4 +1,4 @@
-import cache.CacheProxy;
+import calculator.CacheProxy;
 import calculator.Calculator;
 import calculator.CalculatorImpl;
 
@@ -14,7 +14,9 @@ public class Main {
 ////        Integer res =  calculator.calcFactorial(3 );
 ////        System.out.println( "calcFactorial result = " + res);
 
-        Double square = calculator.circleArea("0", 3.14, 10);
+        Double square = calculator.circleArea("2", 3.14, 10);
+        square = calculator.circleArea("2", 3.14, 10);
+        square = calculator.circleArea("2", 3.14, 10);
         System.out.println( "square = " + square );
     }
 }

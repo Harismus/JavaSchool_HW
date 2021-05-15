@@ -38,4 +38,12 @@ class Data implements Serializable {
     public Object getInvoke() {
         return invoke;
     }
+
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public Object[] getArgs() {
+        return args;
+    }
 }

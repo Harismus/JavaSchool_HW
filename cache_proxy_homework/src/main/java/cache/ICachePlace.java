@@ -15,28 +15,10 @@ public interface ICachePlace {
     void set(String methodName, Object[] args, Object result);
 
 
-  //  void set(String pathToFile, String methodName, Object[] args, Object result);
-
-    /**
-     *
-     * @param method
-     * @param args
-     * @return
-     */
-    Optional<Object> get(Method method, Object[] args);
-
     /**
      *
      * @param method
      * @return
      */
-    Optional<Object> get(String method);
-
-    /**
-     *
-     * @param method
-     * @param args
-     * @return
-     */
-    boolean contains(Method method, Object[] args);
+    Optional<Data> get(String method, Object[] args);
 }

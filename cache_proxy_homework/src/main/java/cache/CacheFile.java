@@ -30,23 +30,24 @@ public class CacheFile  implements ICachePlace{
         }
     }
 
-    public boolean contains(Method method, Object[] args) {
-        return true;
-    }
 
-    public Optional<Object> get(Method method, Object[] args) { //!< тут не используется
-        return Optional.empty();
-    }
+
+//
+//    public Optional<Object> get(Method method, Object[] args) { //!< тут не используется
+//        return Optional.empty();
+//    }
 
     @Override
-    public Optional<Object> get(String methodName) {
+    public Optional<Data> get(String methodName, Object[] args) {
         FileInputStream fileInputStream = null;
-        Object cache = null;
+        Data cache = null;
         try {
             fileInputStream = new FileInputStream(  dirCache.toString() + methodName + ".cache" );
             ObjectInputStream objectInputStream = new ObjectInputStream( fileInputStream );
             Data data = (Data) objectInputStream.readObject() ;
-            cache = data.equals( null ) ? null : data.getInvoke();
+
+
+            cache = data.equals( null ) ? null : data;
         } catch (FileNotFoundException e) {
             System.out.println( e.getMessage() );
         } catch (NotSerializableException e) {

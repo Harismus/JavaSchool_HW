@@ -1,32 +1,47 @@
 package cache;
 
-import com.sun.corba.se.spi.ior.ObjectKey;
-
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class CacheMemory implements ICachePlace{
 
-    private Map<Data, Object> cache = new HashMap<>();
+public class CacheMemory implements ICachePlace {
+
+
+    private Set<Data> list = new HashSet<>();
 
     @Override
-    public void set(String methodName, Object[] args, Object result)   {
-        cache.put( new Data( methodName, args ), result );
+    public void set(String methodName, Object[] args, Object result) {
+        list.add( new Data( methodName, args, result ) );
     }
 
-    @Override
-    public boolean contains(Method method, Object[] args) {
-        return cache.containsKey(new Data( method.getName(), args ) );
-    }
 
     @Override
-    public Optional<Object> get(Method method, Object[] args) {
-        return Optional.of( cache.get(new Data( method.getName(), args )) );
-    }
+    public Optional<Data> get(String methodName, Object[] args) {
+        Data res = null;
+        for (Data d : list) {
+            boolean b = false;
 
-    @Override
-    public Optional<Object> get(String method) { //!< тут не используется
-        return Optional.empty();
+            if (d.getMethodName().equals( methodName )) {
+                for (Object dataArg : d.getArgs()) {
+
+                    for (Object arg : args) {
+                        if (dataArg == arg) {
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b == false) {
+                        break;
+                    }
+
+                }
+                res = d;
+                break;
+            }
+        }
+
+
+        return Optional.ofNullable( res );
     }
 
 }

@@ -3,9 +3,7 @@ package calculator;
 import enums.cacheType;
 import myannotation.CacheMethod;
 
-import java.io.Serializable;
-
-public class CalculatorImpl implements Calculator, Serializable {
+public class CalculatorImpl implements Calculator {
 
     @CacheMethod(savedPlace = cacheType.FILE)
     @Override

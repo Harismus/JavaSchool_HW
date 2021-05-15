@@ -1,6 +1,4 @@
-package cache;
-
-import calculator.*;
+package calculator;
 
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;

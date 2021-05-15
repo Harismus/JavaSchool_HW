@@ -5,17 +5,14 @@ import calculator.CalculatorImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
-public class CacheFileTest {
-
-    private CacheFile cacheFile = new CacheFile( Paths.get("." + File.separatorChar ).toAbsolutePath());
+public class CacheMemoryTest {
+    private CacheMemory cacheMemory = new CacheMemory();
     Calculator calculator = new CalculatorImpl();
     Method method;
     Object[] args;
@@ -23,7 +20,7 @@ public class CacheFileTest {
     int factArg = 3;
     int expectedResult = 6;
 
-   @Before
+    @Before
     public void init() {
         try {
             method = calculator.getClass().getMethod( "calcFactorial", int.class );
@@ -37,22 +34,17 @@ public class CacheFileTest {
             e.printStackTrace();
         }
 
-        cacheFile.set( method.getName(), args, result );
+        cacheMemory.set( method.getName(), args, result );
     }
 
     @Test
     public void set() {
-        File file = new File(Paths.get("." + File.separatorChar + method.getName() + ".cache").toAbsolutePath().toString());
-        assertTrue( file.exists() );
-    }
 
-    @Test
-    public void contains() {
     }
 
     @Test
     public void get() {
-        Optional<Data> res = cacheFile.get( method.getName(), args );
+        Optional<Data> res = cacheMemory.get( method.getName(), args );
         Data data = res.orElse( null );
         assertNotNull( data );
 
