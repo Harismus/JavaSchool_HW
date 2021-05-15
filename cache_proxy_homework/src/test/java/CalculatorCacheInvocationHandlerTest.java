@@ -3,11 +3,9 @@ import calculator.CalculatorCacheInvocationHandler;
 import calculator.CalculatorImpl;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.lang.reflect.Proxy;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -23,7 +21,7 @@ public class CalculatorCacheInvocationHandlerTest {
     Class[] interfaces = delegate.getClass().getInterfaces();
 
     //Создаем прокси нашего объекта
-    Calculator proxyCalculator = (Calculator) Proxy.newProxyInstance( serverClassLoader, interfaces, new CalculatorCacheInvocationHandler( delegate ) );
+    Calculator proxyCalculator = (Calculator) Proxy.newProxyInstance( serverClassLoader, interfaces, new CalculatorCacheInvocationHandler( delegate, Paths.get("." + File.separatorChar ).toAbsolutePath() ) );
 
     public  <T> Optional<T> readCache(String nameMethod) {
         FileInputStream fileInputStream = null;

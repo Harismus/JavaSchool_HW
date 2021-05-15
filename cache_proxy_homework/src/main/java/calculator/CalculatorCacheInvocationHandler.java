@@ -5,6 +5,7 @@ import myannotation.*;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.nio.file.Path;
 import java.util.Optional;
 
 
@@ -13,16 +14,17 @@ public class CalculatorCacheInvocationHandler implements InvocationHandler {
     long before = 0;
     long after = 0;
 
-    ICacheService cacheService = new CacheService();
+    ICacheService cacheService;
 
-    public CalculatorCacheInvocationHandler(Object delegate) {
+    public CalculatorCacheInvocationHandler(Object delegate, Path dirCache) {
         this.delegate = delegate;
+        cacheService = new CacheService(dirCache);
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         if (method.isAnnotationPresent( CacheMethod.class )) { //!< если кеш аннотация, то проверим наличия в кеше результата
-            Optional<Object> result = cacheService.tryReadingFromCache( method, args );
+            Optional<Object> result = cacheService.tryReadingFromCache( method, args);
             if (result.isPresent())
                 return  result.get();
         }

@@ -1,46 +1,32 @@
 package cache;
 
+import com.sun.corba.se.spi.ior.ObjectKey;
+
 import java.lang.reflect.Method;
 import java.util.*;
 
-public class CacheMemory {
-    class Data {
-        Data(Method method, Object[] args) {
-            this.method = method;
-            this.args = args;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Data data = (Data) o;
-            return Objects.equals( method, data.method ) && Arrays.equals( args, data.args );
-        }
-
-        @Override
-        public int hashCode() {
-            int result = Objects.hash( method );
-            result = 31 * result + Arrays.hashCode( args );
-            return result;
-        }
-
-        Method method;
-        Object[] args;
-    }
+public class CacheMemory implements ICachePlace{
 
     private Map<Data, Object> cache = new HashMap<>();
 
-    public void add(Method method, Object[] args, Object result)   {
-        cache.put( new Data( method, args ), result );
+    @Override
+    public void set(String methodName, Object[] args, Object result)   {
+        cache.put( new Data( methodName, args ), result );
     }
 
+    @Override
     public boolean contains(Method method, Object[] args) {
-        return cache.containsKey(new Data( method, args ) );
+        return cache.containsKey(new Data( method.getName(), args ) );
     }
 
+    @Override
     public Optional<Object> get(Method method, Object[] args) {
-        return Optional.of( cache.get(new Data( method, args )) );
+        return Optional.of( cache.get(new Data( method.getName(), args )) );
+    }
+
+    @Override
+    public Optional<Object> get(String method) { //!< тут не используется
+        return Optional.empty();
     }
 
 }

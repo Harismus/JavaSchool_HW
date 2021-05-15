@@ -10,7 +10,6 @@ public class CalculatorImpl implements Calculator, Serializable {
     @CacheMethod(savedPlace = cacheType.FILE)
     @Override
     public Integer calcFactorial(int number) {
-        System.out.println( "number = " + number );
         if (number <= 0) {
             return 0;
         }
@@ -23,7 +22,7 @@ public class CalculatorImpl implements Calculator, Serializable {
     }
 
     @Override
-    public Double circleArea(final double M_PI, double Radius) {
+    public Double circleArea(String tag, final double M_PI, double Radius) {
         return M_PI * Radius * Radius;
     }
 }

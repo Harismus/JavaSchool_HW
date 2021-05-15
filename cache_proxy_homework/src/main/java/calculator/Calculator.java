@@ -13,5 +13,15 @@ public interface Calculator {
     @Metric
     Integer calcFactorial (int number);
 
-    Double circleArea(double M_PI, double Radius);
+    /**
+     *
+     * @param tag пометка
+     * @param M_PI константа
+     * @param Radius некий радиус
+     * @return возвращает значение площади круга
+     */
+    @CacheMethod(savedPlace = cacheType.FILE, identityBy = String.class)
+    Double circleArea(String tag, final double M_PI, double Radius);
+
+
 }
