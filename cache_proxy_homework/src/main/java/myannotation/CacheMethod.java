@@ -17,7 +17,7 @@ public @interface CacheMethod {
     cacheType savedPlace() default cacheType.MEMORY;
     boolean isZip() default false;
     String fileNamePrefix() default "data";
-    Class[] identityBy() default{String.class, double.class};
+    Class[] identityBy() default{};
 
 }
 

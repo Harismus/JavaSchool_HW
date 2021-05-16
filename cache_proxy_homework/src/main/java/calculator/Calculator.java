@@ -20,7 +20,7 @@ public interface Calculator {
      * @param Radius некий радиус
      * @return возвращает значение площади круга
      */
-    @CacheMethod(savedPlace = cacheType.MEMORY, identityBy = String.class)
+    @CacheMethod(savedPlace = cacheType.FILE, identityBy = String.class, isZip = true)
     Double circleArea(String tag, final double M_PI, double Radius);
 
 

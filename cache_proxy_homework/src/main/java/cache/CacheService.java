@@ -2,6 +2,7 @@ package cache;
 
 import enums.cacheType;
 import myannotation.CacheMethod;
+import zip.ZipService;
 
 import java.lang.reflect.Method;
 import java.nio.file.Path;
@@ -13,9 +14,12 @@ import java.util.Optional;
 public class CacheService implements ICacheService {
     private CacheMemory cacheMemory = new CacheMemory();
     private CacheFile cacheFile;
+    private ZipService zipService;
+
 
     public CacheService(Path dirCache) {
         cacheFile = new CacheFile( dirCache );
+        zipService = new ZipService( dirCache );
     }
 
     @Override
@@ -49,10 +53,10 @@ public class CacheService implements ICacheService {
                     }
                 }
 
-                System.out.println("Данные прочитаны из кеша");
+                System.out.println( "Данные прочитаны из кеша" );
                 result = data.getInvoke();
-            }else {
-                System.out.println("Данных нет в кеше");
+            } else {
+                System.out.println( "Данных нет в кеше" );
             }
 
         } else if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.MEMORY) {
@@ -80,11 +84,10 @@ public class CacheService implements ICacheService {
                     }
                 }
 
-                System.out.println("Данные прочитаны из кеша");
+                System.out.println( "Данные прочитаны из кеша" );
                 result = data.getInvoke();
-            }
-            else {
-                System.out.println("Данных нет в кеше");
+            } else {
+                System.out.println( "Данных нет в кеше" );
             }
 
         }
@@ -97,6 +100,11 @@ public class CacheService implements ICacheService {
         if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.FILE) {
             System.out.println( "Запись кеша в файл" );
             cacheFile.set( method.getName(), args, invoke );
+            if (method.getAnnotation( CacheMethod.class ).isZip()) {
+                zipService.zip( method.getName() + ".cache", method.getName() + ".zip" );
+            }
+
+
         } else if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.MEMORY) {
             System.out.println( "Запись кеша в память" );
             cacheMemory.set( method.getName(), args, invoke );
@@ -113,8 +121,7 @@ public class CacheService implements ICacheService {
                     cachesArgs.add( o );
             } );
         }
-
-        return cachesArgs.toArray();
+        return classList.length != 0 ? cachesArgs.toArray() : args; //!< если список аннотаций по параметрам метода пуст, то берем все аргументы
     }
 }
 

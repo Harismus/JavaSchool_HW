@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class CacheFile  implements ICachePlace{
     Path dirCache;
-    CacheFile( Path dirCache) {
+    public CacheFile(Path dirCache) {
         this.dirCache = dirCache;
     }
 
