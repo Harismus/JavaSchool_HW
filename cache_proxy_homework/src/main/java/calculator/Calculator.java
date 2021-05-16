@@ -22,7 +22,7 @@ public interface Calculator {
      * @param end конечный число
      * @return
      */
-    @CacheMethod(savedPlace = cacheType.MEMORY)
+    @CacheMethod(savedPlace = cacheType.FILE, sizeReturn = 2)
     @Metric
     List<Integer> calcRangeFactorial (int begin, int end);
 

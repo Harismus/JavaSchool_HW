@@ -18,6 +18,6 @@ public @interface CacheMethod {
     boolean isZip() default false;
     String fileNamePrefix() default "data";
     Class[] identityBy() default{};
-
+    int sizeReturn() default 1;
 }
 
