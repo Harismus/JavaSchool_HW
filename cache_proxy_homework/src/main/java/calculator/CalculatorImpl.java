@@ -3,6 +3,9 @@ package calculator;
 import enums.cacheType;
 import myannotation.CacheMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalculatorImpl implements Calculator {
 
     @CacheMethod(savedPlace = cacheType.FILE)
@@ -17,6 +20,17 @@ public class CalculatorImpl implements Calculator {
             res *= i;
         }
         return res;
+    }
+
+    @Override
+    public List<Integer> calcRangeFactorial(int begin, int end) {
+
+        List<Integer> list = new ArrayList<>();
+        for (int i = begin; i < end; i++) {
+            Integer res = calcFactorial( i );
+            list.add( res );
+        }
+        return list;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class CacheMemory implements ICachePlace {
 
 
     @Override
-    public Optional<Data> get(String methodName, Object[] args) {
+    public Optional<Data> get(String methodName, Object[] args) { //!< TODO переписать нормально нужно
         Data res = null;
         for (Data d : list) {
             boolean b = false;

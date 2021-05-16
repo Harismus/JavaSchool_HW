@@ -31,7 +31,10 @@ public class CacheService implements ICacheService {
         if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.FILE) {
             System.out.println( "Попытка чтения в кеше (файл)" );
 
-            Optional<Data> res = cacheFile.get( method.getName(), args );
+            String fileNamePrefix = method.getAnnotation( CacheMethod.class ).fileNamePrefix();
+            String fileName = fileNamePrefix.length() > 0 ? fileNamePrefix : method.getName();
+
+            Optional<Data> res = cacheFile.get( fileName, args );
 
             Data data = res.orElse( null );
             if (data != null) {
@@ -99,9 +102,12 @@ public class CacheService implements ICacheService {
     public void tryWritingCache(Method method, Object[] args, Object invoke) {
         if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.FILE) {
             System.out.println( "Запись кеша в файл" );
-            cacheFile.set( method.getName(), args, invoke );
+            String fileNamePrefix = method.getAnnotation( CacheMethod.class ).fileNamePrefix();
+            String fileName = fileNamePrefix.length() > 0 ? fileNamePrefix : method.getName();
+
+            cacheFile.set( fileName, args, invoke );
             if (method.getAnnotation( CacheMethod.class ).isZip()) {
-                zipService.zip( method.getName() + ".cache", method.getName() + ".zip" );
+                zipService.zip( fileName + ".cache", fileName + ".zip" );
             }
 
 

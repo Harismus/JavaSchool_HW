@@ -1,7 +1,6 @@
 package cache;
 
 import java.io.*;
-import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -11,13 +10,13 @@ public class CacheFile  implements ICachePlace{
         this.dirCache = dirCache;
     }
 
-    public void set(String methodName, Object[] args, Object invoke) {
+    public void set(String fileName, Object[] args, Object invoke) {
         FileOutputStream fileOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream( dirCache.toString() + methodName + ".cache" );
+            fileOutputStream = new FileOutputStream( dirCache.toString() + fileName + ".cache" );
             ObjectOutputStream objectOutputStream = new ObjectOutputStream( fileOutputStream );
 
-            Data data = new Data( methodName, args, invoke );
+            Data data = new Data( fileName, args, invoke );
             objectOutputStream.writeObject( data );
 
             objectOutputStream.close();
@@ -32,17 +31,12 @@ public class CacheFile  implements ICachePlace{
 
 
 
-//
-//    public Optional<Object> get(Method method, Object[] args) { //!< тут не используется
-//        return Optional.empty();
-//    }
-
     @Override
-    public Optional<Data> get(String methodName, Object[] args) {
+    public Optional<Data> get(String fileName, Object[] args) {
         FileInputStream fileInputStream = null;
         Data cache = null;
         try {
-            fileInputStream = new FileInputStream(  dirCache.toString() + methodName + ".cache" );
+            fileInputStream = new FileInputStream(  dirCache.toString() + fileName + ".cache" );
             ObjectInputStream objectInputStream = new ObjectInputStream( fileInputStream );
             Data data = (Data) objectInputStream.readObject() ;
 
