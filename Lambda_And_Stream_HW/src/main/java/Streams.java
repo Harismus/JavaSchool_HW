@@ -19,7 +19,7 @@ public class Streams<T> {
         return new Streams<T>( list );
     }
 
-    public Streams<T> filter(Predicate<T> predicate) {
+    public Streams<T> filter(Predicate<? super T> predicate) {
         List<T> temp = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             T t = list.get( i );
