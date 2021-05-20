@@ -15,16 +15,16 @@ public class Main {
 ////        Integer res =  calculator.calcFactorial(3 );
 ////        System.out.println( "calcFactorial result = " + res);
 
-//        Double square = calculator.circleArea("2", 3.14, 10);
-//        square = calculator.circleArea("2", 3.14, 10);
-//        square = calculator.circleArea("2", 3.14, 10);
-//        System.out.println( "square = " + square );
+        Double square = calculator.circleArea("2", 3.14, 10);
+        square = calculator.circleArea("2", 3.14, 10);
+        square = calculator.circleArea("2", 3.14, 10);
+        System.out.println( "square = " + square );
 
 
-        List<Integer> factorialList = calculator.calcRangeFactorial( 1, 5 );
-
-
-        System.out.println( "factorialList = " + factorialList );
+//        List<Integer> factorialList = calculator.calcRangeFactorial( 1, 5 );
+//
+//
+//        System.out.println( "factorialList = " + factorialList );
         
         
         
