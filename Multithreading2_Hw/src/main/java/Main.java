@@ -1,11 +1,11 @@
 import calculator.CalculatorImpl;
 import thread.ThreadPool;
-import thread.ThreadPoolImpl;
+import thread.FixedThreadPoolImpl;
 
 public class Main {
     public static void main(String[] args) {
 
-        ThreadPool threadPool = new ThreadPoolImpl(2);
+        ThreadPool threadPool = new FixedThreadPoolImpl(2);
 
         for (int i = 1; i < 5; i++) {
             threadPool.execute( new TestTask(new CalculatorImpl(), i) );

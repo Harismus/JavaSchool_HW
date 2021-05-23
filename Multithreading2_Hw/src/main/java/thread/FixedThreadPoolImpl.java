@@ -3,12 +3,12 @@ package thread;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class ThreadPoolImpl implements ThreadPool {
+public class FixedThreadPoolImpl implements ThreadPool {
 
     volatile private Queue<Runnable> listTasks = new ArrayDeque<>();
     private ThreadHandler[] threadHandler;
 
-    public ThreadPoolImpl(int countThread) {
+    public FixedThreadPoolImpl(int countThread) {
         if (countThread <= 0)
             throw new IllegalArgumentException( "Не правильный аргумент" );
 
