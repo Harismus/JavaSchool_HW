@@ -1,19 +1,27 @@
+package thread;
+
 import calculator.CalculatorImpl;
-import thread.ThreadPool;
-import thread.FixedThreadPoolImpl;
+import org.junit.Before;
+import org.junit.Test;
 import tasks.TestTask;
 
-public class Main {
-    public static void main(String[] args) {
 
-        ThreadPool threadPool = new FixedThreadPoolImpl(2);
+public class FixedThreadPoolImplTest {
 
+    ThreadPool threadPool = new FixedThreadPoolImpl(2);
+
+    @Before
+    public void init() {
         for (int i = 1; i < 5; i++) {
             threadPool.execute( new TestTask(new CalculatorImpl(), i) );
         }
+    }
 
+
+
+    @Test
+    public void start() {
         threadPool.start();
-
         try {
             Thread.currentThread().sleep(5000);
         } catch (InterruptedException e) {
@@ -23,7 +31,5 @@ public class Main {
         for (int i = 5; i < 10; i++) {
             threadPool.execute( new TestTask(new CalculatorImpl(), i) );
         }
-
-
     }
 }

@@ -15,7 +15,7 @@ public class FixedThreadPoolImpl implements ThreadPool {
         threadHandler = new ThreadHandler[countThread];
 
         for (int i = 0; i < countThread; i++) {
-            threadHandler[i] = new ThreadHandler(listTasks);
+            threadHandler[i] = new ThreadHandler(listTasks, false);
         }
     }
 

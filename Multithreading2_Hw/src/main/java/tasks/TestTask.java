@@ -1,10 +1,12 @@
+package tasks;
+
 import calculator.CalculatorImpl;
 
 public class TestTask implements Runnable {
     private CalculatorImpl calculator;
     private int arg;
 
-    TestTask(CalculatorImpl calculator, int arg) {
+    public TestTask(CalculatorImpl calculator, int arg) {
         this.calculator = calculator;
         this.arg = arg;
     }
@@ -12,8 +14,8 @@ public class TestTask implements Runnable {
     @Override
     public void run() {
         int res = calculator.calcFactorial( arg );
-        System.out.println("*****************************");
-        System.out.println( "arg = " + arg );
-        System.out.println( "res = " + res );
+
+        System.out.println( "arg = " + arg + " res = " + res);
+
     }
 }
