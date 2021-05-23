@@ -4,6 +4,12 @@ import calculator.CalculatorImpl;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+class test {
+    final String name;
+    test(String name) {
+        this.name = name;
+    }
+}
 
 
 public class Main {
