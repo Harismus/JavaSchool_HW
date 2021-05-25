@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class FixedThreadPoolImpl implements ThreadPool {
-
     volatile private Queue<Runnable> listTasks = new ArrayDeque<>();
     private ThreadHandler[] threadHandler;
 

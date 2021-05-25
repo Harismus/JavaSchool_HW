@@ -6,9 +6,8 @@ import java.util.Queue;
 import java.util.List;
 
 public class ScalableThreadPool implements ThreadPool {
-
-    int min;
-    int max;
+    private int min;
+    private int max;
     volatile private Queue<Runnable> listTasks = new ArrayDeque<>();
     private List<ThreadHandler> listHandlers;
 
@@ -41,7 +40,7 @@ public class ScalableThreadPool implements ThreadPool {
 
             boolean b = false;
             for (Thread thread : listHandlers) {
-                if (thread.getState() == Thread.State.RUNNABLE)
+                if (thread.getState() == Thread.State.RUNNABLE )
                     b = true;
             }
 

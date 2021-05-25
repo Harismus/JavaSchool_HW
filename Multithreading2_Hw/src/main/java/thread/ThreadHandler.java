@@ -8,8 +8,6 @@ public class ThreadHandler extends Thread {
     private boolean isRemovable;
 
     ThreadHandler(Queue<Runnable> listTasks, boolean isRemovable) {
-
-
         this.isRemovable = isRemovable;
         this.listTasks = listTasks;
     }
@@ -37,16 +35,13 @@ public class ThreadHandler extends Thread {
                     }
                 }
 
-
                 currentRunnable = listTasks.poll();
-
             }
 
             if (!currentRunnable.equals( null )) {
                 System.out.println( "Thread.currentThread().getName() start = " + Thread.currentThread().getName() );
                 currentRunnable.run();
             }
-
         }
     }
 }

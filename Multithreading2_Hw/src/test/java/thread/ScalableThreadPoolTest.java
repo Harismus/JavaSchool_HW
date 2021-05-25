@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ScalableThreadPoolTest {
 
-    ThreadPool threadPool = new ScalableThreadPool(2, 5);
+    ThreadPool threadPool = new ScalableThreadPool(2, 7);
 
     @Before
     public void init() {
@@ -18,7 +18,6 @@ public class ScalableThreadPoolTest {
         }
     }
 
-
     @Test
     public void start() {
         threadPool.start();
@@ -26,6 +25,18 @@ public class ScalableThreadPoolTest {
             Thread.currentThread().sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+
+        for (int i = 1; i < 10; i++) {
+            threadPool.execute( new TestTask(new CalculatorImpl(), i) );
+        }
+
+        for (int i = 1; i < 10; i++) {
+            threadPool.execute( new TestTask(new CalculatorImpl(), i) );
+        }
+
+        for (int i = 1; i < 10; i++) {
+            threadPool.execute( new TestTask(new CalculatorImpl(), i) );
         }
 
         for (int i = 5; i < 10; i++) {
