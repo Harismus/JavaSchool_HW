@@ -1,11 +1,12 @@
 package calculator;
 
+
 public class CalculatorImpl implements Calculator {
 
     @Override
-    public Integer calcFactorial(int number) {
+    public Integer calcFactorial(int number) throws ArithmeticException  {
         if (number <= 0) {
-            return 0;
+            throw new ArithmeticException ( "InvalidArgument" );
         }
         int res = 1;
 

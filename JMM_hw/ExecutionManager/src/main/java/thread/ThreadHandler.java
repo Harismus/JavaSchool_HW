@@ -6,10 +6,15 @@ public class ThreadHandler extends Thread {
     private Queue<Runnable> listTasks;
     private Runnable currentRunnable;
     private boolean isRemovable;
+    private boolean wasThrowned = false;
 
     ThreadHandler(Queue<Runnable> listTasks, boolean isRemovable) {
         this.isRemovable = isRemovable;
         this.listTasks = listTasks;
+    }
+
+    boolean getWasThrowned() {
+        return wasThrowned;
     }
 
     @Override
@@ -24,7 +29,7 @@ public class ThreadHandler extends Thread {
                     try {
                         System.out.println( "isRemovable = " + isRemovable );
                         if (isRemovable) {
-                            System.out.println("exit from thread + " + Thread.currentThread().getName());
+                            System.out.println( "exit from thread + " + Thread.currentThread().getName() );
                             return;
                         } else {
                             System.out.println( "Thread wait" );
@@ -40,8 +45,14 @@ public class ThreadHandler extends Thread {
 
             if (!currentRunnable.equals( null )) {
                 System.out.println( "Thread.currentThread().getName() start = " + Thread.currentThread().getName() );
-                currentRunnable.run();
+                try {
+                    currentRunnable.run();
+                } catch (ArithmeticException e) {
+                    wasThrowned = true;
+                }
             }
         }
     }
+
+
 }

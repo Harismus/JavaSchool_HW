@@ -1,7 +1,5 @@
 package thread;
 
-import thread.Context;
-import thread.ExecutionManager;
 import java.util.List;
 
 public class ExecutionManagerImpl implements ExecutionManager {
@@ -11,8 +9,9 @@ public class ExecutionManagerImpl implements ExecutionManager {
 
     @Override
     public Context execute(Runnable callback, List<Runnable> tasks) {
+
         threadPool = new FixedThreadPoolImpl( tasks.size() );
-        context = new ContextImpl(tasks);
+        context = new ContextImpl(threadPool.getThreads());
 
         for (int i = 0; i < tasks.size(); i++) {
             threadPool.execute( tasks.get( i ) );
@@ -20,6 +19,6 @@ public class ExecutionManagerImpl implements ExecutionManager {
 
         threadPool.start();
 
-        return null;
+        return context;
     }
 }

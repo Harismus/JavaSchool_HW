@@ -1,6 +1,5 @@
 package thread;
 
-import thread.Context;
 import java.util.List;
 
 public interface ExecutionManager {

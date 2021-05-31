@@ -1,5 +1,7 @@
 package thread;
 
+import java.util.List;
+
 public interface ThreadPool {
     /**
      * запускает потоки. Потоки бездействуют, до тех пор пока не появится новое задание в очереди (см. execute)
@@ -11,5 +13,8 @@ public interface ThreadPool {
      * @param runnable
      */
     void execute(Runnable runnable);
+
+
+    List<ThreadHandler> getThreads();
 }
 
