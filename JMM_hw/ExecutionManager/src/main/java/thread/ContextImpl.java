@@ -36,14 +36,10 @@ public class ContextImpl implements Context {
 
     @Override
     public boolean isFinished() {
-
-        for (int i = 0; i < tasks.size(); i++) {
-            Thread.State state = tasks.get( i ).getState();
-            if (state == State.RUNNABLE || state == State.WAITING || state == State.TIMED_WAITING) {
-                return false;
-            }
+        if ((getCompletedTaskCount() == tasks.size()) || (getInterruptedTaskCount() == tasks.size())) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

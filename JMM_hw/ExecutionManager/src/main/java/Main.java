@@ -6,8 +6,6 @@ import java.util.*;
 import java.util.concurrent.*;
 
 
-
-
 public class Main {
     public static void main(String[] args) {
 
@@ -33,8 +31,6 @@ public class Main {
 
         int failedTaskCount = context.getFailedTaskCount();
         System.out.println( "failedTaskCount = " + failedTaskCount );
-
-
         
     }
 }
