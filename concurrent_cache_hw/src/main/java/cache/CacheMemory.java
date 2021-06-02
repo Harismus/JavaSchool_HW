@@ -2,23 +2,25 @@ package cache;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class CacheMemory implements ICachePlace {
 
+    Object object = new Object();
 
-    private Set<Data> list = new HashSet<>();
+    private ConcurrentHashMap<Data, Object> list = new ConcurrentHashMap();
 
     @Override
     public void set(String methodName, Object[] args, Object result) {
-        list.add( new Data( methodName, args, result ) );
+        list.put( new Data( methodName, args, result ), object );
     }
 
 
     @Override
     public Optional<Data> get(String methodName, Object[] args) { //!< TODO переписать нормально нужно
         Data res = null;
-        for (Data d : list) {
+        for (Data d : list.keySet()) {
             boolean b = false;
 
             if (d.getMethodName().equals( methodName )) {

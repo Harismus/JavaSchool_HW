@@ -4,7 +4,9 @@ import calculator.CalculatorImpl;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 public class Main {
@@ -36,8 +38,6 @@ public class Main {
         executor.execute(task3); //!< изменился параметр по котору кешируется метод, чтобы не читался из кеша
 
 
-
-        
         
     }
 }
