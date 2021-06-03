@@ -11,7 +11,7 @@ public interface Calculator {
      * Расчет факториала числа.
      * @param number индекс
      */
-    @CacheMethod(savedPlace = cacheType.MEMORY)
+    @CacheMethod(savedPlace = cacheType.FILE)
     @Metric
     Integer calcFactorial (int number);
 
@@ -22,7 +22,7 @@ public interface Calculator {
      * @param end конечный число
      * @return
      */
-    @CacheMethod(savedPlace = cacheType.MEMORY, sizeReturn = 2)
+    @CacheMethod(savedPlace = cacheType.FILE, sizeReturn = 2)
     @Metric
     List<Integer> calcRangeFactorial (int begin, int end);
 

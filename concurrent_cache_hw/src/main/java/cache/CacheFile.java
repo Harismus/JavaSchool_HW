@@ -29,8 +29,6 @@ public class CacheFile  implements ICachePlace{
         }
     }
 
-
-
     @Override
     public Optional<Data> get(String fileName, Object[] args) {
         FileInputStream fileInputStream = null;
@@ -38,8 +36,7 @@ public class CacheFile  implements ICachePlace{
         try {
             fileInputStream = new FileInputStream(  dirCache.toString() + fileName + ".cache" );
             ObjectInputStream objectInputStream = new ObjectInputStream( fileInputStream );
-            Data data = (Data) objectInputStream.readObject() ;
-
+            Data data = (Data) objectInputStream.readObject();
 
             cache = data.equals( null ) ? null : data;
         } catch (FileNotFoundException e) {
