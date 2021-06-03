@@ -19,27 +19,14 @@ public class CacheMemory implements ICachePlace {
     public Optional<Data> get(String methodName, Object[] args) { //!< TODO переписать нормально нужно
         Data res = null;
         for (Data d : list.keySet()) {
-            boolean b = false;
 
             if (d.getMethodName().equals( methodName )) {
-                for (Object dataArg : d.getArgs()) {
-
-                    for (Object arg : args) {
-                        if (dataArg == arg) {
-                            b = true;
-                            break;
-                        }
-                    }
-                    if (b == false) {
-                        break;
-                    }
-
+                if (Arrays.equals(d.getArgs(), args)) {
+                    res = d;
+                    break;
                 }
-                res = d;
-                break;
             }
         }
-
 
         return Optional.ofNullable( res );
     }

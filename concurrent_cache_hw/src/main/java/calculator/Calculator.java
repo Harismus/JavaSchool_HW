@@ -11,7 +11,7 @@ public interface Calculator {
      * Расчет факториала числа.
      * @param number индекс
      */
-    @CacheMethod(savedPlace = cacheType.FILE)
+    @CacheMethod(savedPlace = cacheType.MEMORY)
     @Metric
     Integer calcFactorial (int number);
 
