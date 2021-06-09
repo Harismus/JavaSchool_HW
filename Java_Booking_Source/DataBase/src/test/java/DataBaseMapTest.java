@@ -1,3 +1,7 @@
+import model.Auditorium;
+import model.Conference;
+import model.DoctorsAppointment;
+import model.IResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,26 +10,26 @@ import static org.junit.Assert.*;
 
 
 public class DataBaseMapTest {
-    IDataBase dataBase = new DataBaseMap();
+    service.IDataBase dataBase = new service.DataBaseMap();
     IResource conference = new Conference();
     IResource auditorium = new Auditorium();
     IResource docAppointment = new DoctorsAppointment();
-    Id idAuditorium;
-    Id idConference;
+    model.Id idAuditorium;
+    model.Id idConference;
 
     @Before
     public void init() {
         try {
             idConference = dataBase.add( conference );
             idAuditorium = dataBase.add( auditorium );
-        } catch (ElementAvailableException e) {
+        } catch (exceptions.ElementAvailableException e) {
             e.printStackTrace();
         }
     }
 
     @Test
     public void testAdd() {
-        Throwable thrown = assertThrows( ElementAvailableException.class, () -> {
+        Throwable thrown = assertThrows( exceptions.ElementAvailableException.class, () -> {
             dataBase.add( conference );
         } );
         assertNotNull( thrown.getMessage() );
@@ -34,8 +38,8 @@ public class DataBaseMapTest {
 
     @Test
     public void testRemove() {
-        Throwable thrown = assertThrows( NoElementException.class, () -> {
-            dataBase.remove( new Id() );
+        Throwable thrown = assertThrows( exceptions.NoElementException.class, () -> {
+            dataBase.remove( new model.Id() );
         } );
         assertNotNull( thrown.getMessage() );
         System.out.println( "thrown = " + thrown.getMessage() );
@@ -51,7 +55,7 @@ public class DataBaseMapTest {
         try {
             dataBase.remove( idConference );
             dataBase.remove( idAuditorium );
-        } catch (NoElementException e) {
+        } catch (exceptions.NoElementException e) {
             e.printStackTrace();
         }
     }

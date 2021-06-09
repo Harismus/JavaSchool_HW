@@ -9,6 +9,7 @@ import java.util.concurrent.Executor;
 public class Main {
     public static void main(String[] args) {
 
+
         CacheProxy cacheProxy = new CacheProxy( Paths.get(  ".\\" ).toAbsolutePath());
 
         Calculator calculator = cacheProxy.cache(new CalculatorImpl());
