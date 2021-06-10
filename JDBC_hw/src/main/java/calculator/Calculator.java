@@ -25,7 +25,7 @@ public interface Calculator {
      * @param end   конечный число
      * @return
      */
-    @CacheMethod(savedPlace = cacheType.FILE, sizeReturn = 2)
+    @CacheMethod(savedPlace = cacheType.FILE, sizeReturn = 100)
     @Metric
     @Cacheable(H2DataBase.class)
     List<Integer> calcRangeFactorial(int begin, int end);

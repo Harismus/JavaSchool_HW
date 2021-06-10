@@ -1,0 +1,5 @@
+dao/FactorialDao.class
+dao/FactorialDaoImpl.class
+connection/H2DataBase.class
+connection/DataBase.class
+model/Factorial.class

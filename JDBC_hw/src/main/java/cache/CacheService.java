@@ -1,6 +1,8 @@
 package cache;
 
 import connection.H2DataBase;
+import dao.FactorialDao;
+import dao.FactorialDaoImpl;
 import enums.cacheType;
 import myannotation.CacheMethod;
 import myannotation.Cacheable;
@@ -18,6 +20,7 @@ public class CacheService implements ICacheService {
     private CacheMemory cacheMemory = new CacheMemory();
     private CacheFile cacheFile;
     private ZipService zipService;
+    private FactorialDao factorialDao = new FactorialDaoImpl();
 
     public CacheService(Path dirCache) {
         cacheFile = new CacheFile(dirCache);
@@ -26,7 +29,8 @@ public class CacheService implements ICacheService {
 
     /**
      * Проверка изменились ли аргументы для кеша в аннотации аннотированного метода по сравнению с аргументами из кеша
-     * @param res ресурс кеша
+     *
+     * @param res        ресурс кеша
      * @param cachesArgs отслеживаемые аргументы из аннотации
      * @return возвращает результат в виде ссылки на Object или null, если кеша нет или аннотация изменилась
      */
@@ -82,45 +86,53 @@ public class CacheService implements ICacheService {
 
     @Override
     public void tryWritingCache(Method method, Object[] args, Object invoke) {
-        System.out.println( "method before lock = " + method );
+        System.out.println("method before lock = " + method);
         synchronized (method) {//!< делает синхронизацию по метода, соответственно, если он одинаковый, то залочится
-            System.out.println( "method inner lock = " + method );
-            if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.FILE) {
-                System.out.println( "Запись кеша в файл" );
-                System.out.println( "invoke = " + invoke );
+            System.out.println("method inner lock = " + method);
+            if (method.getAnnotation(CacheMethod.class).savedPlace() == cacheType.FILE) {
+                System.out.println("Запись кеша в файл");
+                System.out.println("invoke = " + invoke);
 
-                if (method.getAnnotation( CacheMethod.class ).sizeReturn() > 1 //!< ограничения количества кешируемых значений, если List
+                if (method.getAnnotation(CacheMethod.class).sizeReturn() > 1 //!< ограничения количества кешируемых значений, если List
                         && method.getReturnType() == java.util.List.class) {
                     List<Object> list = (List<Object>) invoke;
-                    int size = method.getAnnotation( CacheMethod.class ).sizeReturn();
-                    Object[] array = Arrays.copyOf( list.toArray(), size );
+                    int size = method.getAnnotation(CacheMethod.class).sizeReturn();
+                    Object[] array = Arrays.copyOf(list.toArray(), list.size() > size ? size : list.size());
                     list.clear();
-                    list.addAll( Arrays.asList( array ) );
+                    list.addAll(Arrays.asList(array));
 
                     for (Object o : list) {
-                        System.out.println( "o = " + o );
+                        System.out.println("o = " + o);
                     }
 
                     invoke = list;
                 }
 
-                String fileNamePrefix = method.getAnnotation( CacheMethod.class ).fileNamePrefix();
+                String fileNamePrefix = method.getAnnotation(CacheMethod.class).fileNamePrefix();
                 String fileName = fileNamePrefix.length() > 0 ? fileNamePrefix : method.getName();
-                cacheFile.set( fileName, args, invoke );
+                cacheFile.set(fileName, args, invoke);
 
-                if (method.getAnnotation( CacheMethod.class ).isZip()) { //!< архивация, если есть
-                    zipService.zip( fileName + ".cache", fileName + ".zip" );
+                if (method.getAnnotation(CacheMethod.class).isZip()) { //!< архивация, если есть
+                    zipService.zip(fileName + ".cache", fileName + ".zip");
                 }
 
-            } else if (method.getAnnotation( CacheMethod.class ).savedPlace() == cacheType.MEMORY) {
-                System.out.println( "Запись кеша в память" );
-                cacheMemory.set( method.getName(), args, invoke );
-            } else if ( method.getAnnotation( Cacheable.class ).value() == H2DataBase.class ) {
-                System.out.println( "Запись кеша в H2 data base" );
+            } else if (method.getAnnotation(CacheMethod.class).savedPlace() == cacheType.MEMORY) {
+                System.out.println("Запись кеша в память");
+                cacheMemory.set(method.getName(), args, invoke);
+            }
 
+            if (method.getAnnotation(Cacheable.class).value() == H2DataBase.class) {
+                System.out.println("Запись кеша в H2 data base");
+
+                List<Object> list = (List<Object>) invoke;
+
+                int minNum = (int) args[0];
+                for (int i = 0; i < list.size() ; i++) {
+                     factorialDao.createFactorial(minNum++, (int) list.get(i));
+                }
             }
         }
-        System.out.println( "method after lock = " + method );
+        System.out.println("method after lock = " + method);
     }
 
     private Object[] getAnnotationMethodParams(Method method, Object[] args) {

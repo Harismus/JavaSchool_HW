@@ -23,11 +23,11 @@ public class CalculatorCacheInvocationHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (method.isAnnotationPresent( CacheMethod.class )) { //!< если кеш аннотация, то проверим наличия в кеше результата
-            Optional<Object> result = cacheService.tryReadingFromCache( method, args);
-            if (result.isPresent())
-                return  result.get();
-        }
+//        if (method.isAnnotationPresent( CacheMethod.class )) { //!< если кеш аннотация, то проверим наличия в кеше результата
+//            Optional<Object> result = cacheService.tryReadingFromCache( method, args);
+//            if (result.isPresent())
+//                return  result.get();
+//        }
 
         if (method.isAnnotationPresent( Metric.class )) { //!< замеряем время начала
             before = System.nanoTime();

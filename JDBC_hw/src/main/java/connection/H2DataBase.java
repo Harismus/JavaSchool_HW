@@ -14,8 +14,8 @@ import java.sql.SQLException;
 public class H2DataBase implements DataBase {
 
     private String URL = "jdbc:h2:~/test";
-    private String USER = "sa";
-    private String PASS = "";
+    private String USER = "user";
+    private String PASS = "123";
 
 
     public Connection connection() throws SQLException {

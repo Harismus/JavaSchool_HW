@@ -10,14 +10,14 @@ import java.sql.SQLException;
 
 public class FactorialDaoImpl implements FactorialDao {
     private DataBase dataBase = new H2DataBase();
-    private final String INSERT_ANIMAL_SQL = "insert into animal (name, type) values (?, ?)";
-    private final String UPDATE_ANIMAL_PERSON_SQL = "update animal set person_id = ? where id = ?";
+    private final String INSERT_FACTORIAL_SQL = "insert into factorial (num, result) values (?, ?)";
+
 
 
     @Override
     public Factorial createFactorial(int number, int result) {
         try (PreparedStatement statement = dataBase.connection()
-                .prepareStatement(INSERT_ANIMAL_SQL)) {
+                .prepareStatement(INSERT_FACTORIAL_SQL)) {
             createFactorialStatement(statement, number, result);
             statement.execute();
 
@@ -42,7 +42,7 @@ public class FactorialDaoImpl implements FactorialDao {
     @Override
     public Factorial findFactorial(int number, int result) {
         try (PreparedStatement statement = dataBase.connection()
-                .prepareStatement("select * from animal a where a.name=? and a.type=?")) {
+                .prepareStatement("select * from factorial a where a.num=? and a.result=?")) {
 
             statement.setInt(1, number);
             statement.setInt(2, result);
