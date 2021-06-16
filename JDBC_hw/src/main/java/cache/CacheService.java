@@ -95,6 +95,7 @@ public class CacheService implements ICacheService {
 
                 if (method.getAnnotation(CacheMethod.class).sizeReturn() > 1 //!< ограничения количества кешируемых значений, если List
                         && method.getReturnType() == java.util.List.class) {
+
                     List<Object> list = (List<Object>) invoke;
                     int size = method.getAnnotation(CacheMethod.class).sizeReturn();
                     Object[] array = Arrays.copyOf(list.toArray(), list.size() > size ? size : list.size());
@@ -122,7 +123,7 @@ public class CacheService implements ICacheService {
             }
 
             if (method.getAnnotation(Cacheable.class).value() == H2DataBase.class) {
-                System.out.println("Запись кеша в H2 data base");
+                System.out.println("Запись кеша в H2 data base"); //!< TODO нужно подумать о проверке результат ли List
 
                 List<Object> list = (List<Object>) invoke;
 

@@ -1,0 +1,4 @@
+https://master.qt.io/archive/qt/6.1/6.1.1/submodules/qtdeclarative-everywhere-src-6.1.1.zip
+http://master.qt.io/archive/qt/6.1/6.1.1/submodules/qtwayland-everywhere-src-6.1.1.zip
+https://master.qt.io/archive/qt/6.1/6.1.1/submodules/qt3d-everywhere-src-6.1.1.zip
+https://master.qt.io/archive/qt/6.1/6.1.1/submodules/qtdoc-everywhere-src-6.1.1.zip
