@@ -1,0 +1,2 @@
+create table person (id varchar(36) primary key, name varchar(255) not null, email varchar(255) not null unique);
+insert into person values ('jack-daniels', 'Jack Daniels', 'jackdaniels@example.com'), ('george-dickel', 'George Dickel', 'georgedickel@example.com');

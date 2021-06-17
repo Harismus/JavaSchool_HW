@@ -1,0 +1,7 @@
+com/utils/RecipesMapper.class
+com/utils/RecipeJDBCTemplate.class
+com/Main.class
+com/model/Ingredient.class
+com/config/SpringJdbcConfig.class
+com/dao/RecipeDAO.class
+com/model/Recipe.class
