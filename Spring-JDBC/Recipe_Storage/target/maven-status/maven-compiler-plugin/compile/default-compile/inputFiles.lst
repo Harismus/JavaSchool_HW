@@ -1,7 +1,10 @@
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/utils/RecipesMapper.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/model/Ingredient.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/dao/RecipeDAO.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/config/SpringJdbcConfig.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/Main.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/utils/RecipeJDBCTemplate.java
-/home/user/Projects/java/JavaSchool_HW/Spring-JDBC/Recipe_Storage/src/main/java/com/model/Recipe.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\dao\RecipeDAO.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\utils\RecipesMapper.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\config\MyApplicationContextConfiguration.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\utils\MysqlDataSource.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\config\SpringJdbcConfig.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\utils\RecipeJDBCTemplate.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\model\Ingredient.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\dao\UserDao.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\model\Recipe.java
+C:\projects\java\JavaSchool_HW\Spring-JDBC\Recipe_Storage\src\main\java\com\Main.java
