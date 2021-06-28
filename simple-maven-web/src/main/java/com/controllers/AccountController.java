@@ -1,7 +1,8 @@
 package com.controllers;
 
+import com.dao.AccountDao;
 import com.model.Account;
-import com.service.AccountService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     @Autowired
-    AccountService accountService;
+    AccountDao accountDao;
     @GetMapping(value = "/open-account")
     public String openAccountForm (){
         System.out.println("AccountController.openAccountForm");
@@ -23,25 +24,22 @@ public class AccountController {
     @PostMapping(value = "/open-account")
     public String save (Account account){
         System.out.println( "AccountController.save" );
-        accountService.open(account);
+        accountDao.createAccount( account );
         return "redirect:/accounts/"+account.getId();
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.initDirectFieldAccess();
-        binder.setDisallowedFields("id");
-        binder.setRequiredFields("name", "balance");
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        binder.initDirectFieldAccess();
+//        binder.setDisallowedFields("id");
+//        binder.setRequiredFields("name", "balance");
+//    }
 
 
 
     @GetMapping("/accounts/{accountId}")
-    public String show(@PathVariable("accountId") long accountId, ModelMap
-            model) {
-        Account account = accountService.findOne( accountId );
-
-
+    public String show(@PathVariable("accountId") long accountId, ModelMap model) {
+        Account account = accountDao.getAccountById( accountId );
         model.put("account", account);
         return "accountDetails";
     }
